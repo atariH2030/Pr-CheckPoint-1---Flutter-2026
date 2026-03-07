@@ -54,6 +54,17 @@ if (Test-Path ".env") {
     Write-Host "      Preencha os valores abaixo (pressione Enter para manter vazio):" -ForegroundColor Cyan
     Write-Host ""
 
+    # Dicionário com instruções detalhadas para cada variável
+    $varInstructions = @{
+        "API_BASE_URL" = @{
+            descricao  = "Endereco base da API REST que o app consome"
+            porQue     = "Sem ela, o app nao consegue buscar os produtos"
+            ondAchar   = "Fornecida pelo professor ou responsavel pelo back-end"
+            formato    = "Deve comecar com https:// e NAO terminar com /"
+            exemplo    = "https://gdapp.com.br/api/fiap"
+        }
+    }
+
     # Lê cada variável do .env.example e solicita o valor ao usuário
     $envLines = Get-Content ".env.example"
     $newEnvContent = @()
@@ -68,11 +79,26 @@ if (Test-Path ".env") {
         # Extrai o nome da variável
         if ($line -match "^([^=]+)=(.*)$") {
             $varName = $matches[1].Trim()
-            $currentValue = $matches[2].Trim()
 
-            $input = Read-Host "      $varName"
-            if ($input -ne "") {
-                $newEnvContent += "$varName=$input"
+            Write-Host ""
+            Write-Host "      ┌─────────────────────────────────────────────┐" -ForegroundColor Cyan
+            Write-Host "      │ VARIAVEL: $varName" -ForegroundColor Cyan
+            Write-Host "      ├─────────────────────────────────────────────┤" -ForegroundColor Cyan
+
+            if ($varInstructions.ContainsKey($varName)) {
+                $info = $varInstructions[$varName]
+                Write-Host "      │ O QUE E  : $($info.descricao)" -ForegroundColor White
+                Write-Host "      │ POR QUE  : $($info.porQue)" -ForegroundColor White
+                Write-Host "      │ ONDE ACHAR: $($info.ondAchar)" -ForegroundColor White
+                Write-Host "      │ FORMATO  : $($info.formato)" -ForegroundColor White
+                Write-Host "      │ EXEMPLO  : $($info.exemplo)" -ForegroundColor DarkGray
+            }
+
+            Write-Host "      └─────────────────────────────────────────────┘" -ForegroundColor Cyan
+
+            $userInput = Read-Host "      >>> Digite o valor para $varName"
+            if ($userInput -ne "") {
+                $newEnvContent += "$varName=$userInput"
             } else {
                 $newEnvContent += $line
             }

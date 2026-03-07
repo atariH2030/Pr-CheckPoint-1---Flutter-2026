@@ -62,8 +62,22 @@ lib/
 
 ---
 
-## 🔒 Segurança
+## � Variáveis de ambiente necessárias
 
-- **Nunca** commite o arquivo `.env`
-- Use o `.env.example` como referência para novos devs
-- Armazene chaves sensíveis em um cofre de senhas compartilhado com o time
+Abaixo está a descrição completa de **cada informação secreta** que você precisará fornecer ao rodar o `setup.ps1`. O script vai pedir uma por uma com todas estas instruções na tela.
+
+---
+
+### `API_BASE_URL`
+
+| Campo | Detalhe |
+|---|---|
+| **O que é** | Endereço base da API REST que o app consome |
+| **Por que precisa** | Sem ela, o app não consegue buscar os produtos |
+| **Onde encontrar** | Fornecida pelo professor ou responsável pelo back-end do projeto |
+| **Formato** | Deve começar com `https://` e **não** terminar com `/` |
+| **Exemplo** | `https://gdapp.com.br/api/fiap` |
+
+---
+
+> 💡 Se futuramente o projeto ganhar novas variáveis (ex: chaves de autenticação, tokens de API), elas serão adicionadas aqui com o mesmo padrão de documentação.
