@@ -1,3 +1,6 @@
+# Variáveis de ambiente - NUNCA subir para o repositório!
+.env
+
 # Miscellaneous
 *.class
 *.log

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'core/http_client.dart';
 import 'data/datasources/product_datasource.dart';
@@ -6,7 +7,10 @@ import 'data/repositories/product_repository_impl.dart';
 import 'presentation/controllers/product_controller.dart';
 import 'presentation/pages/product_page.dart';
 
-void main() {
+void main() async {
+  // Carrega as variáveis de ambiente antes de qualquer coisa
+  await dotenv.load(fileName: '.env');
+
   final httpClient = CustomHttpClient();
   final datasource = ProductDatasource(httpClient);
   final repository = ProductRepositoryImpl(datasource);

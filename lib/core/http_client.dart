@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Centraliza todas as requisições HTTP do app - funciona como intermediário entre app e API
 class CustomHttpClient {
@@ -10,7 +11,8 @@ class CustomHttpClient {
   // Busca todos os produtos da API de forma assíncrona
   // Future<Response> promete retornar uma resposta da API
   Future<Response> getProducts() async {
+    final baseUrl = dotenv.env['API_BASE_URL'] ?? '';
     // await aguarda a resposta antes de continuar
-    return await dio.get('https://gdapp.com.br/api/fiap/products');
+    return await dio.get('$baseUrl/products');
   }
 }
