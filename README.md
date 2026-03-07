@@ -6,43 +6,29 @@ Projeto desenvolvido na Aula 3 de Flutter, demonstrando consumo de API REST com 
 
 ## 🚀 Como rodar o projeto em um novo dispositivo
 
-### 1. Pré-requisitos
+### Pré-requisitos
 - [Flutter SDK](https://docs.flutter.dev/get-started/install) instalado e configurado
 - [Git](https://git-scm.com/) instalado
-- Um editor (VS Code ou Android Studio)
 
-### 2. Clonar o repositório
-```bash
+### Setup em 3 comandos (Windows)
+```powershell
 git clone https://github.com/atariH2030/Pr-CheckPoint-1---Flutter-2026.git
 cd Pr-CheckPoint-1---Flutter-2026
+.\setup.ps1
 ```
 
-### 3. Configurar as variáveis de ambiente ⚠️
-O arquivo `.env` **não está no repositório** por questões de segurança.
-Você precisa criá-lo manualmente na raiz do projeto:
+O script `setup.ps1` faz tudo automaticamente:
+1. ✅ Verifica se o Flutter está instalado
+2. ✅ Instala as dependências (`flutter pub get`)
+3. ✅ Cria o `.env` a partir do `.env.example` e **pede apenas os valores secretos**
+4. ✅ Valida se todas as variáveis obrigatórias foram preenchidas
 
-```bash
-# Copie o arquivo de exemplo
-cp .env.example .env
-```
-
-Em seguida, abra o `.env` e preencha com os valores reais:
-
-```env
-API_BASE_URL=https://gdapp.com.br/api/fiap
-```
-
-> 💡 Os valores reais devem ser combinados com o time ou armazenados em um gerenciador de segredos (ex: Bitwarden, 1Password, Azure Key Vault).
-
-### 4. Instalar as dependências
-```bash
-flutter pub get
-```
-
-### 5. Rodar o projeto
-```bash
+Após o setup, basta executar:
+```powershell
 flutter run
 ```
+
+> 💡 **GitHub Copilot** consegue ler este README e executar o setup automaticamente — basta pedir!
 
 ---
 
