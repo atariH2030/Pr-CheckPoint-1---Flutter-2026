@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'core/http_client.dart';
 import 'data/datasources/product_datasource.dart';
 import 'data/repositories/product_repository_impl.dart';
+import 'domain/usecases/get_product_use_case.dart';
 import 'presentation/controllers/product_controller.dart';
 import 'presentation/pages/product_page.dart';
 
@@ -14,10 +15,11 @@ void main() async {
   final httpClient = CustomHttpClient();
   final datasource = ProductDatasource(httpClient);
   final repository = ProductRepositoryImpl(datasource);
+  final getProductUseCase = GetProductUseCase(repository);
 
   runApp(
     ChangeNotifierProvider(
-      create: (_) => ProductController(repository),
+      create: (_) => ProductController(getProductUseCase),
       child: const MyApp(),
     ),
   );
